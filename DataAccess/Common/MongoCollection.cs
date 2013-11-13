@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-//using System.Linq;
+//
 
 namespace Ifeng.DataAccess.Common
 {

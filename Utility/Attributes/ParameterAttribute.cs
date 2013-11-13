@@ -1,5 +1,5 @@
 ﻿using System;
-//using System.Linq;
+//
 
 namespace Ifeng.Utility.Attributes
 {

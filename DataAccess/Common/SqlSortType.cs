@@ -1,4 +1,4 @@
-﻿//using System.Linq;
+﻿//
 
 namespace Ifeng.DataAccess.Common
 {
