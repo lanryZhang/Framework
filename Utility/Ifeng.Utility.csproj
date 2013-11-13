@@ -244,9 +244,7 @@
     <None Include="Json\Serialization\vssver2.scc" />
     <None Include="Json\Utilities\vssver2.scc" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Xml\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy  $(ProjectDir)bin\Debug\Ifeng.Utility.dll $(SolutionDir)Bin\ 
