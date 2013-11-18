@@ -64,6 +64,7 @@
     <Compile Include="Ftp\FTPClient.cs" />
     <Compile Include="Helper\CacheHelper.cs" />
     <Compile Include="Helper\ConvertHelper.cs" />
+    <Compile Include="Helper\SmtpServerHelper.cs" />
     <Compile Include="Helper\EnumHelper.cs" />
     <Compile Include="Helper\ExceptionHelper.cs" />
     <Compile Include="Helper\JsonHelper.cs" />
