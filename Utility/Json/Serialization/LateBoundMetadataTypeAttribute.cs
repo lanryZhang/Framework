@@ -26,7 +26,7 @@
 #if !SILVERLIGHT && !PocketPC && !NET20
 using System;
 using System.Collections.Generic;
-using System.Linq;
+
 using System.Text;
 using Newtonsoft.Json.Utilities;
 using System.Reflection;

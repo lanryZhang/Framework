@@ -25,6 +25,12 @@ namespace Ifeng.Utility.Helper
             set { timeOut = value; }
         }
 
+        public CookieContainer Cookie
+        {
+            get { return this.request.CookieContainer; }
+            set { this.request.CookieContainer = value; }
+        }
+
         public HttpWebRequest RequestInstance
         {
             get { return request; }
@@ -88,23 +94,18 @@ namespace Ifeng.Utility.Helper
         {
             var paramStr = InitParam();
             byte[] data = Encoding.UTF8.GetBytes(paramStr);
+            
             this.request = (HttpWebRequest)HttpWebRequest.Create(uri);
             this.request.ContentLength = data.Length;
 
             this.request.Timeout = timeOut;
             this.request.KeepAlive = true;
             this.request.Method = "POST";
-            try
+            this.request.ContentType = "application/x-www-form-urlencoded";
+
+            using (var stream = request.GetRequestStream())
             {
-                using (var stream = this.request.GetRequestStream())
-                {
-                    var writer = new StreamWriter(stream, Encoding.UTF8);
-                    writer.Write(data);
-                }
-            }
-            catch (IOException err)
-            {
-                return err.ToString();
+                stream.Write(data, 0, data.Length);
             }
 
             return OnRequest(onComplete);

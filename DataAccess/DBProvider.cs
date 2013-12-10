@@ -1,7 +1,7 @@
 ﻿using Ifeng.DataAccess.NoSql.MongoDb.Provider;
 using Ifeng.DataAccess.Sql.Provider;
 using Ifeng.DataAccess.NoSql.Redis;
-using ServiceStack.Redis;
+
 
 namespace Ifeng.DataAccess
 {

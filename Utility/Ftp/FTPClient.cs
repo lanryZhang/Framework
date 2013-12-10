@@ -786,8 +786,8 @@ namespace Ifeng.Utility.Ftp
                 throw e;
             }
             this.MonitorMessage("finished.", MessageType.Prompt);
-
             this.CloseDataSocket();
+
             this.WaitForReply(226, 250);
 
             this.Status = FTPClientStatus.UploadCompleted;
@@ -1071,8 +1071,8 @@ namespace Ifeng.Utility.Ftp
                 if (!string.IsNullOrEmpty(bakHost))
                     this.tcpClient = new TcpClient(host, port);
             }
-            this.tcpClient.ReceiveTimeout = 5000;
-            this.tcpClient.SendTimeout = 5000;
+            this.tcpClient.ReceiveTimeout = 30000;
+            this.tcpClient.SendTimeout = 30000;
             this.OpenCommunicator(this.tcpClient.GetStream(), encode);
             this.closed = false;
         }

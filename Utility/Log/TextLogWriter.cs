@@ -9,6 +9,8 @@ namespace Ifeng.Utility.Log
 {
     public class TextLogWriter: ILogWriter
     {
+        private static object _lockObj = new object();
+
 		public TextLogWriter()
 		{
             this.LogDirectory = ConfigurationManager.AppSettings["LogPath"] ?? ConfigurationManager.AppSettings["ExceptionLogPath"];
@@ -63,16 +65,27 @@ namespace Ifeng.Utility.Log
 
 		private void Write(LogType logType, string logName, string msg, params object[] args)
 		{
-			string filePath = GetLogFilePath(logName ?? logType.ToString());
-			using (StreamWriter sw = new StreamWriter(filePath, true, Encoding.UTF8))
-			{
-				sw.WriteLine(DateTime.Now.ToString());
-				sw.WriteLine("------------------------------------------");
-				sw.WriteLine("LogType: {0}", logType);
-                if (args == null || args.Length == 0) sw.WriteLine(msg);
-                else sw.WriteLine(msg, args);
-				sw.WriteLine();
-			}
+            try
+            {
+                if (System.Threading.Monitor.TryEnter(_lockObj))
+                {
+                    string filePath = GetLogFilePath(logName ?? logType.ToString());
+                    using (StreamWriter sw = new StreamWriter(filePath, true, Encoding.UTF8))
+                    {
+                        sw.WriteLine(DateTime.Now.ToString());
+                        sw.WriteLine("------------------------------------------");
+                        sw.WriteLine("LogType: {0}", logType);
+                        if (args == null || args.Length == 0) sw.WriteLine(msg);
+                        else sw.WriteLine(msg, args);
+                        sw.WriteLine();
+                    }
+                    System.Threading.Monitor.Exit(_lockObj);
+                }
+            }
+            catch
+            {
+                System.Threading.Monitor.Exit(_lockObj);
+            }
 		}
 
 		// 获取日志文件路径
