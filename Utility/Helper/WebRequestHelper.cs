@@ -13,7 +13,7 @@ namespace Ifeng.Utility.Helper
     public class WebRequestHelper
     {
         private HttpWebRequest request = null;
-        private List<KeyValuePair<string, string>> param = null;
+        private List<KeyValuePair<string, object>> param = null;
         private int timeOut = 10000;
         private string url = string.Empty;
         private Uri uri = null;
@@ -43,7 +43,7 @@ namespace Ifeng.Utility.Helper
             this.uri = new Uri(url);
         }
 
-        public WebRequestHelper(string url, List<KeyValuePair<string, string>> param)
+        public WebRequestHelper(string url, List<KeyValuePair<string, object>> param)
         {
             this.url = url;
             this.uri = new Uri(url);
